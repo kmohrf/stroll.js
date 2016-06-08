@@ -1,0 +1,25 @@
+{
+  "name": "stroll.js",
+  "version": "1.0.0",
+  "description": "stroll.js is strolling along in your viewport",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmohrf/stroll.js.git"
+  },
+  "keywords": [
+    "scroll",
+    "stroll",
+    "stroll.js",
+    "browser"
+  ],
+  "author": "Konrad Mohrfeldt <konrad.mohrfeldt@farbdev.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kmohrf/stroll.js/issues"
+  },
+  "homepage": "https://github.com/kmohrf/stroll.js#readme"
+}

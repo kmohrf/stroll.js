@@ -17,13 +17,13 @@ function create_options(options) {
     });
 }
 
-function resolve_target(user_target, start) {
+function resolve_target(user_target, start, offset) {
     const type = typeof user_target;
     const target = type === "string" ? document.querySelector(user_target) : user_target;
     const result = {};
 
     if(type === "number") {
-        result.target = user_target - start;
+        result.target = user_target - start + offset;
         result.focus = false;
         return result;
     }
@@ -33,7 +33,7 @@ function resolve_target(user_target, start) {
     }
 
     result.element = target;
-    result.target =  target.getBoundingClientRect().top;
+    result.target = target.getBoundingClientRect().top + offset;
 
     return result;
 }

@@ -22,6 +22,12 @@ function resolve_target(user_target, start, offset) {
     const target = type === "string" ? document.querySelector(user_target) : user_target;
     const result = {};
 
+    if(user_target === null || type === "undefined") {
+        result.target = offset;
+        result.focus = false;
+        return result;
+    }
+
     if(type === "number") {
         result.target = user_target - start + offset;
         result.focus = false;
@@ -121,6 +127,7 @@ function stroll(target, options = {}) {
     return new Promise(loop.start);
 }
 
+stroll.relative = (offset, options = {}) => stroll(null, Object.assign({ offset }, options));
 stroll.DEFAULTS = {};
 
 export default stroll;

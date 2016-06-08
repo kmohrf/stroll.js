@@ -2,9 +2,11 @@
   "name": "stroll.js",
   "version": "1.0.0",
   "description": "stroll.js is strolling along in your viewport",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel -d dist/ src/",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,20 @@
   "bugs": {
     "url": "https://github.com/kmohrf/stroll.js/issues"
   },
-  "homepage": "https://github.com/kmohrf/stroll.js#readme"
+  "homepage": "https://github.com/kmohrf/stroll.js#readme",
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "add-module-exports",
+      "transform-es2015-modules-umd"
+    ]
+  }
 }

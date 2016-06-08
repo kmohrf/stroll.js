@@ -12,7 +12,7 @@ function create_options(options) {
             t--;
             return -c / 2 * (t * (t - 2) - 1) + b;
         }
-}, stroll.DEFAULTS, options, {
+    }, stroll.DEFAULTS, options, {
         start: window.scrollY || window.pageYOffset
     });
 }

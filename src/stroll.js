@@ -121,12 +121,14 @@ function create_loop(options) {
 }
 
 function stroll(target, options = {}) {
-    const stroll_options = create_options(options);
-    const stroll_target = resolve_target(target, stroll_options.start, stroll_options.offset);
-    const duration = resolve_duration(stroll_options.duration, Math.abs(stroll_target.target));
-    const loop = create_loop(Object.assign({}, stroll_options, stroll_target, { duration }));
+    return new Promise((resolve) => {
+        const stroll_options = create_options(options);
+        const stroll_target = resolve_target(target, stroll_options.start, stroll_options.offset);
+        const duration = resolve_duration(stroll_options.duration, Math.abs(stroll_target.target));
+        const loop = create_loop(Object.assign({}, stroll_options, stroll_target, { duration }));
 
-    return new Promise(loop.start);
+        loop.start(resolve);
+    });
 }
 
 stroll.relative = (offset, options = {}) => stroll(null, Object.assign({ offset }, options));

@@ -101,7 +101,7 @@ stroll(".target")
 
 
 ### Browser Compatibility
-stroll.js uses is build for modern Browsers. It uses the  Object.assign, requestAnimationFrame and Promise APIs.
+stroll.js is build for modern Browsers. It uses the Object.assign, requestAnimationFrame and Promise APIs.
 You may want to polyfill these. requestAnimationFrame is widespread nowadays, but Object.assign and Promises
 are quite new additions and part of ES-2015. Polyfills that should work for you:
 

@@ -1,5 +1,6 @@
 # stroll.js
 A tiny library without dependencies for smooth scrolling in modern browsers.
+Think of [Mr. Toast](https://www.youtube.com/watch?v=W8pTG9Mlm0I)!
  
 ## Installation
 

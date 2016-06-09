@@ -62,7 +62,7 @@ function resolve_duration(duration, distance) {
 }
 
 function create_loop(options) {
-    function start_loop(resolve, reject) {
+    function start_loop(resolve) {
         let animation_frame;
         let time_start;
 
@@ -94,7 +94,7 @@ function create_loop(options) {
 
         return current_stroll = () => {
             cancelAnimationFrame(animation_frame);
-            reject();
+            resolve({ was_cancelled: true });
         }
     }
 
@@ -114,7 +114,7 @@ function create_loop(options) {
             options.element.focus()
         }
 
-        resolve();
+        resolve({ was_cancelled: false });
     }
 
     return { start: start_loop };

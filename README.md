@@ -22,8 +22,9 @@ import stroll from "stroll.js";
 stroll(".target");
 ```
 
-stroll returns native Promises. It resolves once scrolling is complete or rejects
-if it was cancelled (by calling stroll again while it’s strolling along).
+stroll returns native Promises. It resolves to an object once scrolling is complete. The object contains a single
+property named `was_cancelled` that indicates if scrolling was completed (in case stroll was called again
+before it finished it’s `false`).
 
 stroll’s first argument can be a number (absolute position in viewport), a selector string
 or something that has a getBoundingClientRect function. You can also pass null, if you want to

@@ -1,6 +1,6 @@
 {
   "name": "stroll.js",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "stroll.js is strolling along in your viewport",
   "main": "dist/stroll.js",
   "scripts": {

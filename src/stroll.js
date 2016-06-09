@@ -1,3 +1,5 @@
+import "babel-polyfill";
+
 let current_stroll;
 
 function create_options(options) {

@@ -10,7 +10,7 @@ npm install stroll.js --save
 ```
 
 ### Script
-Just include the `dist/scroll.min.js` but refer to the polyfill section below. As the `dist` is not
+Just include the `dist/scroll.min.js` but refer to the polyfill section below. As the `dist` folder is not
 part of the repository you still need to install the package via npm.
 
 

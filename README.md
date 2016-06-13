@@ -44,6 +44,10 @@ Should the element you scroll to be focused once scrolling is done? this keeps k
 ### easing (function, easeInOutQuad from [Robert Penner](http://robertpenner.com/easing/))
 Timing function that is used to animate the scroll position.
 
+### ignore_user_scroll (bool, false)
+Whether or not programmatic scrolling should be aborted when a user has scrolled.
+This works by checking the last calculated scroll position against the current position.
+
 ### allow_invalid_positions (bool, false)
 Whether or not positions outside of the document are allowed during strolling or should trigger an early exit.
 

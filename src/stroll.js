@@ -10,8 +10,13 @@ function document_height() {
     );
 }
 
+function current_position() {
+    return window.scrollY || window.pageYOffset;
+}
+
 function create_options(options) {
     return Object.assign({
+        ignore_user_scroll: false,
         allow_invalid_positions: false,
         offset: 0,
         duration: 500,
@@ -24,7 +29,7 @@ function create_options(options) {
             return -c / 2 * (t * (t - 2) - 1) + b;
         }
     }, stroll.DEFAULTS, options, {
-        start: window.scrollY || window.pageYOffset
+        start: current_position()
     });
 }
 
@@ -73,11 +78,18 @@ function resolve_duration(duration, distance) {
 function create_loop(options) {
     function start_loop(resolve) {
         let animation_frame;
+        let last_pos;
         let time_start;
 
         function loop(time_current) {
             if(!time_start) {
                 time_start = time_current
+            }
+
+            if(!options.ignore_user_scroll && last_pos && current_position() !== last_pos) {
+                current_stroll();
+                // as we’re in a raf callback, the abort callback will not cancel the current execution
+                return;
             }
 
             const time_elapsed = time_current - time_start;
@@ -88,6 +100,7 @@ function create_loop(options) {
                 done(resolve);
             } else {
                 window.scrollTo(0, new_pos);
+                last_pos = new_pos;
                 next();
             }
         }

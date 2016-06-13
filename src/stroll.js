@@ -1,5 +1,3 @@
-import "babel-polyfill";
-
 let current_stroll;
 
 function document_height() {

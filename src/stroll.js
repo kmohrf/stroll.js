@@ -2,8 +2,19 @@ import "babel-polyfill";
 
 let current_stroll;
 
+function document_height() {
+    Math.max(
+        document.body.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight
+    );
+}
+
 function create_options(options) {
     return Object.assign({
+        allow_invalid_positions: false,
         offset: 0,
         duration: 500,
         focus: true,
@@ -73,12 +84,13 @@ function create_loop(options) {
 
             const time_elapsed = time_current - time_start;
             const new_pos = Math.round(options.easing(time_elapsed, options.start, options.target, options.duration));
-            window.scrollTo(0, new_pos);
+            const is_invalid_pos = !options.allow_invalid_positions && (new_pos < 0 || new_pos > document_height());
 
-            if(time_elapsed < options.duration) {
-                next();
-            } else {
+            if(time_elapsed > options.duration || is_invalid_pos) {
                 done(resolve);
+            } else {
+                window.scrollTo(0, new_pos);
+                next();
             }
         }
 

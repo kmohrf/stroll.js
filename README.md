@@ -44,6 +44,9 @@ should the element you scroll to be focused once scrolling is done? this keeps k
 ### easing (function, easeInOutQuad from [Robert Penner](http://robertpenner.com/easing/))
 timing function
 
+### allow_invalid_positions (bool, false)
+Whether or not positions outside of the document are allowed during strolling or should trigger an early exit.
+
 
 ## Examples
 
@@ -65,13 +68,14 @@ stroll.DEFAULTS.duration = 2 * 1000
 
 ### ALL the settings
 Scroll to target link anchor - 70px with easeInOutElastic easing for a duration of 10 times 
-the distance to the element and don’t focus.
+the distance to the element, don’t focus and allow invalid positions during animation.
 
 ```es6
 stroll(target.getAttribute("href"), {
     offset: -70,
     duration: (distance) => 10 * distance,
     focus: false,
+    allow_invalid_positions: true,
     easing: (t, b, c, d) => {
         var s=1.70158;var p=0;var a=c;
         if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(.3*1.5);

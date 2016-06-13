@@ -33,16 +33,16 @@ scroll from the current position.
 stroll’s second argument can be an object, with one or more of the following properties:
 
 ### duration (number|function, 500)
-time in milliseconds or a function that returns a duration for a given distance
+Time in milliseconds or a function that returns a duration for a given distance.
  
 ### offset (number, 0)
-is added to the final scroll position. pass a negative number, if you want some space for your fixed header ;)
+Is added to the final scroll position. Pass a negative number, if you want some space for your fixed header ;).
 
 ### focus (bool, true)
-should the element you scroll to be focused once scrolling is done? this keeps keyboard navigation intact.
+Should the element you scroll to be focused once scrolling is done? this keeps keyboard navigation intact.
   
 ### easing (function, easeInOutQuad from [Robert Penner](http://robertpenner.com/easing/))
-timing function
+Timing function that is used to animate the scroll position.
 
 ### allow_invalid_positions (bool, false)
 Whether or not positions outside of the document are allowed during strolling or should trigger an early exit.

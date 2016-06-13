@@ -72,7 +72,7 @@ function create_loop(options) {
             }
 
             const time_elapsed = time_current - time_start;
-            const new_pos = options.easing(time_elapsed, options.start, options.target, options.duration);
+            const new_pos = Math.round(options.easing(time_elapsed, options.start, options.target, options.duration));
             window.scrollTo(0, new_pos);
 
             if(time_elapsed < options.duration) {

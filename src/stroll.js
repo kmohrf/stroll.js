@@ -1,13 +1,17 @@
 let current_stroll;
 
-function document_height() {
-    Math.max(
+function is_pos_outside_document(pos) {
+    if(typeof pos !== "number") return true;
+
+    const max = Math.max(
         document.body.scrollHeight,
         document.body.offsetHeight,
         document.documentElement.clientHeight,
         document.documentElement.scrollHeight,
         document.documentElement.offsetHeight
-    );
+    ) - window.innerHeight;
+
+    return pos < 0 || pos > max;
 }
 
 function current_position() {
@@ -78,29 +82,30 @@ function resolve_duration(duration, distance) {
 function create_loop(options) {
     function start_loop(resolve) {
         let animation_frame;
-        let last_pos;
         let time_start;
+        let last_pos;
 
         function loop(time_current) {
             if(!time_start) {
                 time_start = time_current
             }
 
-            if(!options.ignore_user_scroll && last_pos && current_position() !== last_pos) {
-                current_stroll();
-                // as we’re in a raf callback, the abort callback will not cancel the current execution
-                return;
-            }
-
             const time_elapsed = time_current - time_start;
             const new_pos = Math.round(options.easing(time_elapsed, options.start, options.target, options.duration));
-            const is_invalid_pos = !options.allow_invalid_positions && (new_pos < 0 || new_pos > document_height());
 
-            if(time_elapsed > options.duration || is_invalid_pos) {
+            if(!options.allow_invalid_positions && is_pos_outside_document(new_pos)) {
+                return current_stroll("invalid_position");
+            }
+
+            if(!options.ignore_user_scroll && last_pos && last_pos !== current_position()) {
+                return current_stroll("user_scrolled");
+            }
+
+            if(time_elapsed > options.duration) {
                 done(resolve);
             } else {
                 window.scrollTo(0, new_pos);
-                last_pos = new_pos;
+                last_pos = current_position();
                 next();
             }
         }
@@ -110,14 +115,14 @@ function create_loop(options) {
         }
 
         if(current_stroll) {
-            current_stroll();
+            current_stroll("new_stroll");
         }
 
         next();
 
-        return current_stroll = () => {
+        return current_stroll = (cancel_reason) => {
             cancelAnimationFrame(animation_frame);
-            resolve({ was_cancelled: true });
+            resolve({ was_cancelled: true, cancel_reason });
         }
     }
 

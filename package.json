@@ -5,9 +5,9 @@
   "main": "dist/stroll.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "babel": "babel -d dist/ src/",
+    "rollup": "rollup -c rollup.config.js",
     "min": "uglifyjs dist/stroll.js --output dist/stroll.min.js --screw-ie8 --compress --mangle",
-    "build": "npm run babel && npm run min",
+    "build": "npm run rollup && npm run min",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -18,6 +18,7 @@
     "scroll",
     "stroll",
     "smooth",
+    "promise",
     "stroll.js",
     "browser"
   ],
@@ -28,19 +29,9 @@
   },
   "homepage": "https://github.com/kmohrf/stroll.js#readme",
   "devDependencies": {
-    "babel-cli": "^6.9.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015-rollup": "^1.1.1",
+    "rollup": "^0.31.2",
+    "rollup-plugin-babel": "^2.5.1",
     "uglify-js": "^2.6.2"
-  },
-  "babel": {
-    "presets": [
-      "es2015"
-    ],
-    "plugins": [
-      "add-module-exports",
-      "transform-es2015-modules-umd"
-    ]
   }
 }

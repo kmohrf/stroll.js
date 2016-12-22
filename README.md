@@ -23,7 +23,7 @@ stroll(".target");
 ```
 
 stroll returns native Promises. It resolves to an object once scrolling is complete. The object contains a single
-property named `was_cancelled` that indicates if scrolling was completed (in case stroll was called again
+property named `wasCancelled` that indicates if scrolling was completed (in case stroll was called again
 before it finished it’s `false`).
 
 stroll’s first argument can be a number (absolute position in viewport on _primary scroll axis_), a selector string,
@@ -48,11 +48,11 @@ Should the element you scroll to be focused once scrolling is done? this keeps k
 ### easing (function, easeInOutQuad from [Robert Penner](http://robertpenner.com/easing/))
 Timing function that is used to animate the scroll position.
 
-### ignore_user_scroll (bool, false)
+### ignoreUserScroll (bool, false)
 Whether or not programmatic scrolling should be aborted when a user has scrolled.
 This works by checking if the last set scroll position equals the current position.
 
-### allow_invalid_positions (bool, false)
+### allowInvalidPositions (bool, false)
 Whether or not positions outside of the document are allowed during strolling or should trigger an early exit. 
 
 
@@ -83,7 +83,7 @@ stroll(target.getAttribute("href"), {
     offset: -70,
     duration: (distance) => 10 * (distance.x + distance.y),
     focus: false,
-    allow_invalid_positions: true,
+    allowInvalidPositions: true,
     easing: (t, b, c, d) => {
         var s=1.70158;var p=0;var a=c;
         if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(.3*1.5);
@@ -118,12 +118,12 @@ stroll.js is able to scroll the window as well as elements. If you want to strol
 must create a stroll instance for this element.
 
 ```es6
-const my_element = document.querySelector(".some-element");
-const el_stroll = stroll.factory(my_element);
-el_stroll.relative(500);
+const element = document.querySelector(".some-element");
+const elementStroller = stroll.factory(element);
+elementStroller.relative(500);
 ```
 
-The `el_stroll` instance will have the same API as the default stroll instance (it misses the factory function 
+The `elementStroller` instance will have the same API as the default stroll instance (it misses the factory function 
 though). 
 
 ### Browser Compatibility

@@ -1,18 +1,18 @@
-import create_stroller from "./factory";
-import { create_element_adapter, create_window_adapter } from "./adapters";
+import createStroller from './factory'
+import { createElementAdapter, createWindowAdapter } from './adapters'
 
-const public_adapters = {
-    element: create_element_adapter
-};
+const publicAdapters = {
+  element: createElementAdapter
+}
 
-const stroll = create_stroller(create_window_adapter());
+const stroll = createStroller(createWindowAdapter())
 
-stroll.factory = function(el, adapter = "element") {
-    if(typeof adapter === "string") {
-        adapter = public_adapters[adapter];
-    }
-    
-    return create_stroller(adapter(el));
-};
+stroll.factory = function (el, adapter = 'element') {
+  if (typeof adapter === 'string') {
+    adapter = publicAdapters[adapter]
+  }
 
-export default stroll;
+  return createStroller(adapter(el))
+}
+
+export default stroll

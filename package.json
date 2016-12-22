@@ -7,7 +7,7 @@
     "test": "standard",
     "rollup": "rollup -c rollup.config.js",
     "min": "uglifyjs dist/stroll.js --output dist/stroll.min.js --screw-ie8 --compress --mangle",
-    "build": "npm run rollup && npm run min",
+    "build": "npm run test && standard && npm run rollup && npm run min",
     "prepublish": "npm run build"
   },
   "repository": {

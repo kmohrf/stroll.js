@@ -7,8 +7,8 @@
     "test": "standard",
     "rollup": "rollup -c rollup.config.js",
     "min": "uglifyjs dist/stroll.js --output dist/stroll.min.js --screw-ie8 --compress --mangle",
-    "build": "npm run test && standard && npm run rollup && npm run min",
-    "prepublish": "npm run build"
+    "build": "yarn run test && standard && yarn run rollup && yarn run min",
+    "prepublish": "yarn run build"
   },
   "repository": {
     "type": "git",

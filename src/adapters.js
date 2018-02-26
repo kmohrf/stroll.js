@@ -21,7 +21,7 @@ function resolveTargetFactory (el, createPositionFromNumber) {
       return result
     }
 
-    if (type === 'object') {
+    if (type === 'object' && !(userTarget instanceof window.HTMLElement)) {
       result.target = {
         x: (userTarget.x || 0) - start.x + offset.x,
         y: (userTarget.y || 0) - start.y + offset.y

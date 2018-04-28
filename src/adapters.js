@@ -1,3 +1,6 @@
+const d = typeof document !== 'undefined' ? document : {}
+const w = typeof window !== 'undefined' ? window : {}
+
 function resolveTargetFactory (el, createPositionFromNumber) {
   return function resolveTarget (userTarget, start, offset) {
     const type = typeof userTarget
@@ -21,7 +24,7 @@ function resolveTargetFactory (el, createPositionFromNumber) {
       return result
     }
 
-    if (type === 'object' && !(userTarget instanceof window.HTMLElement)) {
+    if (type === 'object' && !(userTarget instanceof w.HTMLElement)) {
       result.target = {
         x: (userTarget.x || 0) - start.x + offset.x,
         y: (userTarget.y || 0) - start.y + offset.y
@@ -77,35 +80,35 @@ function createBaseAdapter (el, calculateMaxima) {
 function createWindowAdapter () {
   function calculateMaxima () {
     const documentWidth = Math.max(
-                document.body.scrollWidth,
-                document.body.offsetWidth,
-                document.documentElement.clientWidth,
-                document.documentElement.scrollWidth,
-                document.documentElement.offsetWidth
-            ) - window.innerWidth
+                d.body.scrollWidth,
+                d.body.offsetWidth,
+                d.documentElement.clientWidth,
+                d.documentElement.scrollWidth,
+                d.documentElement.offsetWidth
+            ) - w.innerWidth
     const x = Math.max(0, documentWidth)
 
     const documentHeight = Math.max(
-                document.body.scrollHeight,
-                document.body.offsetHeight,
-                document.documentElement.clientHeight,
-                document.documentElement.scrollHeight,
-                document.documentElement.offsetHeight
-            ) - window.innerHeight
+                d.body.scrollHeight,
+                d.body.offsetHeight,
+                d.documentElement.clientHeight,
+                d.documentElement.scrollHeight,
+                d.documentElement.offsetHeight
+            ) - w.innerHeight
     const y = Math.max(0, documentHeight)
 
     return { x, y }
   }
 
-  return Object.assign(createBaseAdapter(document, calculateMaxima), {
+  return Object.assign(createBaseAdapter(d, calculateMaxima), {
     getCurrentPosition () {
       return {
-        x: window.scrollX || window.pageXOffset,
-        y: window.scrollY || window.pageYOffset
+        x: w.scrollX || w.pageXOffset,
+        y: w.scrollY || w.pageYOffset
       }
     },
     scrollTo (pos) {
-      window.scrollTo(pos.x, pos.y)
+      w.scrollTo(pos.x, pos.y)
     }
   })
 }
